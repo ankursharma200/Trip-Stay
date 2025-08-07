@@ -1,10 +1,13 @@
 const express = require("express");
-const wrapAsync = require("../utils/wrapAsync");
+const wrapAsync = require("../utiles/wrapAsync");
 const router = express.Router();
 const passport = require("passport");
 const { saveRedirectUrl } = require("../middleware.js");
 const userController = require("../controllers/user.js");
 
+router.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 router.route("/signup")
 .get(userController.signupForm)

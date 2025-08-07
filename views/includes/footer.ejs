@@ -1,0 +1,33 @@
+<footer>
+    <div class="footer-top">
+        <a href="/listings">Move to top</a>
+    </div>
+    <div class="footer">
+        <div class="footer-socials">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-linkedin"></i>
+        </div>
+        <div class="footer-brand">&#169; Trip-Stay Private Limited</div>
+        <div class="footer-links">
+            Privacy&nbsp;Terms
+        </div>
+    </div>
+</footer>
+
+<script>
+   
+    function toggleFooterTop() {
+        const footerTop = document.getElementsByClassName('footer-top')[0];
+        const currentPath = window.location.pathname;
+
+        if (currentPath === '/listings') {
+            footerTop.style.display = 'block';
+        } else {
+            footerTop.style.display = 'none';
+        }
+    }
+
+    toggleFooterTop();
+    window.addEventListener('popstate', toggleFooterTop);
+</script>

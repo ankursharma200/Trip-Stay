@@ -29,15 +29,29 @@ module.exports.newListingAdd = async (req,res)=>{
     res.redirect("/listings");
 };
 
-module.exports.showListing = async (req,res)=>{
-    let {id} = req.params;
-    let listing = await Listing.findById(id).populate({path:"reviews",populate: {path: "author"}}).populate("owner");
-    if(!listing){
-        req.flash("error","Listing you requested for does not exist!");
-        res.redirect("/listings");
+module.exports.showListing = async (req, res) => {
+    let { id } = req.params;
+    let listing = await Listing.findById(id)
+        .populate({ path: "reviews", populate: { path: "author" } })
+        .populate("owner");
+
+    if (!listing) {
+        req.flash("error", "Listing you requested for does not exist!");
+        return res.redirect("/listings");
     }
-    res.render("listings/show.ejs",{listing});
+
+    // Debugging: log owner to see what we actually have
+    console.log("Owner:", listing.owner);
+
+    // If no owner, handle gracefully
+    if (!listing.owner) {
+        req.flash("error", "Owner information is missing for this listing.");
+        return res.redirect("/listings");
+    }
+
+    res.render("listings/show.ejs", { listing });
 };
+
 
 module.exports.editForm = async (req,res)=>{
     let {id} = req.params;

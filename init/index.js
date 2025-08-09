@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const data = require("./data.js");
 const Listing = require("../models/listing.js");
+require("dotenv").config({ path: __dirname + "/../.env" });
 
 main().
     then(()=>{
@@ -11,13 +12,13 @@ main().
     });
 
 async function main(){
-    await mongoose.connect("mongodb://localhost:27017/tripstay");
+    await mongoose.connect(process.env.ATLASDB_URL);
 }
 
 const initDB = async ()=> {
     await Listing.deleteMany({});
     data.data = data.data.map((obj) => ({
-        ...obj,owner: '68947dd3ad2e491b3d856c35',
+        ...obj,owner: '6896dbee92e8d3e66eb63a7a',
     }))
     await Listing.insertMany(data.data);
     console.log("data initialized successfully");

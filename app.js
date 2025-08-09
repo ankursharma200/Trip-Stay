@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.engine("ejs", ejsMate);
 
-const dbUrl = process.env.ATLASDB_URL || "mongodb://localhost:27017/tripstay";
+const dbUrl = process.env.ATLASDB_URL ;
 
 main()
     .then(() => {
